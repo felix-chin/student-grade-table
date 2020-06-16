@@ -1,13 +1,14 @@
 class App {
+  constructor(gradeTable) {
+    this.handleGetGradesError = this.handleGetGradesError.bind(this);
+    this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
+    this.gradeTable = gradeTable;
+  }
   handleGetGradesError(error) {
     console.error(error);
   }
   handleGetGradesSuccess(grades) {
-    console.log(grades);
-  }
-  constructor() {
-    this.handleGetGradesError = this.handleGetGradesError.bind(this);
-    this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
+    this.gradeTable.updateGrades(grades);
   }
   getGrades() {
     $.ajax({
