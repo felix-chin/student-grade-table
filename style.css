@@ -1,0 +1,8 @@
+@media screen and (max-width: 800px) {
+  .header-col, .avg-col, .table-col, .form-col, .container{
+    width: 85vw;
+    text-align: center;
+    flex-wrap: wrap;
+    display: block;
+  }
+}

@@ -18,10 +18,15 @@ class App {
   handleGetGradesSuccess(grades) {
     this.gradeTable.updateGrades(grades);
     var sum = null;
+    var average = null;
     for (var i = 0; i < grades.length; i++) {
       sum += grades[i].grade;
     }
-    var average = sum / grades.length;
+    if (isNaN(sum / grades.length)) {
+      average = 'N/A';
+    } else {
+      average = sum / grades.length;
+    }
     this.pageHeader.updateAverage(average);
   }
   getGrades() {
