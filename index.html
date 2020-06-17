@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Grade Table</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 <body>
-  <header class="container-fluid">
-    <div class="row align-items-center justify-content-between">
-      <div class="col-sm-auto">
+  <header class="container mt-4 ml-5 mr-5 py-3 px-0 border-bottom">
+    <div class="row align-items-center">
+      <div class="col-sm-9">
         <h1>Student Grade Table</h1>
       </div>
-      <div class="col-sm-auto">
-        <h4>Average Grade <span class="badge badge-secondary"></span></h4>
+      <div class="col-auto">
+        <h3>Average Grade <span class="badge badge-secondary"></span></h3>
       </div>
     </div>
   </header>
-  <div class="container-fluid">
+  <div class="container mt-4 ml-5 mr-5 px-0">
     <div class="row">
       <div class="col-sm-8">
         <table class="table table-striped table-hover">
@@ -27,7 +27,7 @@
               <th scope="col">Name</th>
               <th scope="col">Course</th>
               <th scope="col">Grade</th>
-              <th scope="col">Operations</th>
+              <th class="text-right" scope="col">Operations</th>
             </tr>
           </thead>
           <tbody>
@@ -35,24 +35,31 @@
         </table>
         <p class="d-none">No Grades Recorded</p>
       </div>
-      <div class="col-auto">
+      <div class="col-sm-4">
         <form>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="name"><i class="fa fa-user" aria-hidden="true"></i></span>
-              <input class="form-control" name="name" type="text" placeholder="Student Name" aria-label="Name" aria-describedby="name">
+          <h4 class="mt-2 mb-4">Add Grade</h4>
+          <div class="input-group mb-3 input-group-lg">
+            <div class="input-group-prepend w-100">
+              <span class="input-group-text" id="name">
+                <i class="fa fa-user fa-fw fa-sm" aria-hidden="true"></i>
+              </span>
+              <input class="input-control w-100 px-2" name="name" type="text" placeholder="Student Name">
             </div>
           </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="course"><i class="fa fa-book" aria-hidden="true"></i></span>
-              <input class="form-control" name="course" type="text" placeholder="Student Course" aria-label="Course" aria-describedby="course">
+          <div class="input-group mb-3 input-group-lg">
+            <div class="input-group-prepend w-100">
+              <span class="input-group-text" id="course">
+                <i class="fa fa-book fa-fw fa-sm" aria-hidden="true"></i>
+              </span>
+              <input class="input-control w-100 px-2" name="course" type="text" placeholder="Student Course">
             </div>
           </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="grade"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
-              <input class="form-control" name="grade" type="text" placeholder="Student Grade" aria-label="Grade" aria-describedby="grade">
+          <div class="input-group mb-3 input-group-lg">
+            <div class="input-group-prepend w-100">
+              <span class="input-group-text" id="grade">
+                <i class="fa fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i>
+              </span>
+              <input class="input-control w-100 px-2" name="grade" type="text" placeholder="Student Grade">
             </div>
           </div>
           <button type="submit" class="btn btn-success">Add</button>
