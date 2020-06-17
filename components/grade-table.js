@@ -1,4 +1,5 @@
-var tbody = this.tableElement.querySelector('tbody');
+var tbody = document.querySelector('tbody');
+var p = document.querySelector('p');
 
 class GradeTable {
   constructor(tableElement, noGradesElement) {
@@ -9,6 +10,11 @@ class GradeTable {
     tbody.textContent = '';
     for(var i = 0; i < grades.length; i++){
       this.renderGradeRow(grades, this.deleteGrade)
+    }
+    if(!grades) {
+      p.className = '';
+    } else {
+      p.className = 'd-none';
     }
     console.log(grades);
   }
