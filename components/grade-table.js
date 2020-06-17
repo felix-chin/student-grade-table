@@ -10,7 +10,7 @@ class GradeTable {
     for(var i = 0; i < grades.length; i++){
       this.renderGradeRow(grades[i], this.deleteGrade)
     }
-    if(!grades) {
+    if(grades.length < 1) {
       this.noGradesElement.className = '';
     } else {
       this.noGradesElement.className = 'd-none';
