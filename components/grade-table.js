@@ -36,7 +36,9 @@ class GradeTable {
     del.appendChild(button);
     row.append(student, course, grade, del);
     this.tableElement.lastElementChild.appendChild(row);
-    button.addEventListener('click', deleteGrade(data.id));
+    button.addEventListener('click', function() {
+      deleteGrade(data.id);
+    });
     return row;
   }
 }
