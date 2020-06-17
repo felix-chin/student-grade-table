@@ -1,20 +1,14 @@
+var tbody = this.tableElement.querySelector('tbody');
+
 class GradeTable {
-  constructor(tableElement) {
+  constructor(tableElement, noGradesElement) {
     this.tableElement = tableElement;
+    this.noGradesElement = noGradesElement;
   }
   updateGrades(grades) {
-    var tbody = this.tableElement.querySelector('tbody');
     tbody.textContent = '';
     for(var i = 0; i < grades.length; i++){
-      var row = document.createElement('tr');
-      var student = document.createElement('td');
-      var course = document.createElement('td');
-      var grade = document.createElement('td');
-      student.textContent = grades[i].name;
-      course.textContent = grades[i].course;
-      grade.textContent = grades[i].grade;
-      row.append(student, course, grade);
-      tbody.appendChild(row);
+      this.renderGradeRow(grades, this.deleteGrade)
     }
     console.log(grades);
   }
@@ -22,7 +16,6 @@ class GradeTable {
     this.deleteGrade = deleteGrade;
   }
   renderGradeRow(data, deleteGrade) {
-    var tbody = this.tableElement.querySelector('tbody');
     var row = document.createElement('tr');
     var student = document.createElement('td');
     var course = document.createElement('td');
