@@ -29,7 +29,7 @@ class App {
         "X-Access-Token": "cJdQkJZi"
       },
       error: this.handleGetGradesError,
-      success: this.handleGetGradesSuccess,
+      success: this.handleGetGradesSuccess
     })
   }
   start() {
@@ -37,6 +37,20 @@ class App {
     this.gradeForm.onSubmit(this.createGrade);
   }
   createGrade(name, course, grade) {
+    $.ajax({
+      type: "POST",
+      url: "https://sgt.lfzprototypes.com/api/grades",
+      data: {
+        "name": name,
+        "course": course,
+        "grade": grade
+      },
+      headers: {
+        "X-Access-Token": "cJdQkJZi"
+      },
+      error: this.handleCreateGradeError,
+      success: this.handleCreateGradeSuccess
+    })
     console.log(name, course, grade);
   }
   handleCreateGradeError(error) {
