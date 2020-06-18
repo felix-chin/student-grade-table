@@ -1,10 +1,12 @@
-var form = document.querySelector('form');
-var gradeForm = new GradeForm(form);
-var header = document.querySelector('header');
-var pageHeader = new PageHeader(header);
-var table = document.querySelector('table');
-var p = document.querySelector('p');
-var gradeTable = new GradeTable(table, p);
+var formElement = document.querySelector('form');
+var gradeForm = new GradeForm(formElement);
+var headerElement = document.querySelector('header');
+var pageHeader = new PageHeader(headerElement);
+var tableElement = document.querySelector('table');
+var noGradesElement = document.querySelector('p');
+var gradeTable = new GradeTable(tableElement, noGradesElement);
+var gradeId = null;
 var gradesArray = [];
-var app = new App(gradeTable, pageHeader, gradeForm, gradesArray);
+var gradeObj = {};
+var app = new App(gradeTable, pageHeader, gradeForm, gradeId, gradesArray, gradeObj);
 app.start()
