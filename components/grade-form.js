@@ -10,13 +10,12 @@ class GradeForm {
   onPatch(patchGrade) {
     this.patchGrade = patchGrade;
   }
-
   handleSubmit(event) {
     event.preventDefault();
     var addButton = document.getElementById('add');
     var addHeader = document.querySelector('h4');
     var formData = new FormData(event.target);
-    var id = formData.get('id');
+    var id = null;
     var name = formData.get('name');
     var course = formData.get('course');
     var grade = formData.get('grade');
