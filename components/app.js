@@ -14,7 +14,7 @@ class App {
     this.editGrade = this.editGrade.bind(this);
     this.postGradesArray = this.postGradesArray.bind(this);
     this.deleteGradesArray = this.deleteGradesArray.bind(this);
-    // this.patchGradesArray = this.patchGradesArray.bind(this);
+    this.patchGradesArray = this.patchGradesArray.bind(this);
     this.refreshGradesTable = this.refreshGradesTable.bind(this);
     this.gradeTable = gradeTable;
     this.pageHeader = pageHeader;
