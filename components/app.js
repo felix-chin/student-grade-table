@@ -56,7 +56,6 @@ class App {
     this.getGrades();
     this.gradeForm.onSubmit(this.createGrade);
     this.gradeForm.onPatch(this.patchGrade);
-    this.gradeForm.accessGradeId(this.gradeId);
     this.gradeTable.onDeleteClick(this.deleteGrade);
     this.gradeTable.onEditClick(this.editGrade);
   }
@@ -84,7 +83,6 @@ class App {
       error: this.handleCreateGradeError,
       success: this.handleCreateGradeSuccess
     })
-    console.log(name, course, grade);
   }
   handleDeleteGradeError(error) {
     console.error(error);
@@ -126,6 +124,7 @@ class App {
     this.refreshGradesTable(this.gradesArray);
   }
   patchGrade(id, name, course, grade) {
+    id = this.gradeId;
     $.ajax({
       method: "PATCH",
       url: "https://sgt.lfzprototypes.com/api/grades/" + id,
