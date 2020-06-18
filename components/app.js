@@ -1,5 +1,5 @@
 class App {
-  constructor(gradeTable, pageHeader, gradeForm) {
+  constructor(gradeTable, pageHeader, gradeForm, gradesArray) {
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
     this.createGrade = this.createGrade.bind(this);
@@ -12,14 +12,23 @@ class App {
     this.handlePatchGradeError = this.handlePatchGradeError.bind(this);
     this.handlePatchGradeSuccess = this.handlePatchGradeSuccess.bind(this);
     this.editGrade = this.editGrade.bind(this);
+    this.postGradesArray = this.postGradesArray.bind(this);
+    this.deleteGradesArray = this.deleteGradesArray.bind(this);
+    // this.patchGradesArray = this.patchGradesArray.bind(this);
+    this.refreshGradesTable = this.refreshGradesTable.bind(this);
     this.gradeTable = gradeTable;
     this.pageHeader = pageHeader;
     this.gradeForm = gradeForm;
+    this.gradesArray = gradesArray;
   }
   handleGetGradesError(error) {
     console.error(error);
   }
   handleGetGradesSuccess(grades) {
+    this.gradesArray = grades;
+    this.refreshGradesTable(grades);
+  }
+  refreshGradesTable(grades) {
     this.gradeTable.updateGrades(grades);
     var sum = null;
     var average = null;
@@ -29,13 +38,13 @@ class App {
     if (isNaN(sum / grades.length)) {
       average = 'N/A';
     } else {
-      average = sum / grades.length;
+      average = Math.floor(sum / grades.length);
     }
     this.pageHeader.updateAverage(average);
   }
   getGrades() {
     $.ajax({
-      type: "GET",
+      method: "GET",
       url: "https://sgt.lfzprototypes.com/api/grades",
       headers: {
         "X-Access-Token": "cJdQkJZi"
@@ -53,7 +62,7 @@ class App {
   }
   createGrade(name, course, grade) {
     $.ajax({
-      type: "POST",
+      method: "POST",
       url: "https://sgt.lfzprototypes.com/api/grades",
       data: {
         "name": name,
@@ -64,37 +73,37 @@ class App {
         "X-Access-Token": "cJdQkJZi"
       },
       error: this.handleCreateGradeError,
-      success: this.handleCreateGradeSuccess
+      success: this.handleCreateGradeSuccess(name, course, grade)
     })
     console.log(name, course, grade);
   }
   handleCreateGradeError(error) {
     console.error(error);
   }
-  handleCreateGradeSuccess() {
-    this.getGrades();
+  handleCreateGradeSuccess(name, course, grade) {
+    this.postGradesArray(name, course, grade);
   }
   deleteGrade(id) {
     $.ajax({
-      type: "DELETE",
+      method: "DELETE",
       url: "https://sgt.lfzprototypes.com/api/grades/" + id,
       headers: {
         "X-Access-Token": "cJdQkJZi"
       },
       error: this.handleDeleteGradeError,
-      success: this.handleDeleteGradeSuccess
+      success: this.handleDeleteGradeSuccess(id)
     })
     console.log(id);
   }
   handleDeleteGradeError(error) {
     console.error(error);
   }
-  handleDeleteGradeSuccess() {
-    this.getGrades();
+  handleDeleteGradeSuccess(id) {
+    this.deleteGradesArray(id);
   }
   patchGrade(id, name, course, grade) {
     $.ajax({
-      type: "PATCH",
+      method: "PATCH",
       url: "https://sgt.lfzprototypes.com/api/grades/" + id,
       data: {
         "name": name,
@@ -105,15 +114,14 @@ class App {
         "X-Access-Token": "cJdQkJZi"
       },
       error: this.handlePatchGradeError,
-      success: this.handlePatchGradeSuccess
+      success: this.handlePatchGradeSuccess(id, name, course, grade)
     })
-    console.log(id);
   }
   handlePatchGradeError(error) {
     console.error(error);
   }
-  handlePatchGradeSuccess() {
-    this.getGrades();
+  handlePatchGradeSuccess(id, name, course, grade) {
+    this.patchGradesArray(id, name, course, grade);
   }
   editGrade(id, name, course, grade) {
     var idInput = document.getElementById('id');
@@ -129,5 +137,34 @@ class App {
     gradeInput.value = grade;
     addHeader.textContent = 'Update Grade';
     addButton.textContent = 'Edit';
+  }
+  postGradesArray(id, name, course, grade) {
+    var gradeObject = {};
+    gradeObject.id = Number(id);
+    gradeObject.name = name;
+    gradeObject.course = course;
+    gradeObject.grade = Number(grade);
+    this.gradesArray.push(gradeObject);
+    this.refreshGradesTable(this.gradesArray);
+  }
+  deleteGradesArray(id) {
+    var newArray = [];
+    for(var i = 0; i < this.gradesArray.length; i++) {
+      if(this.gradesArray[i].id !== id) {
+        newArray.push(this.gradesArray[i]);
+      }
+    }
+    this.gradesArray = newArray;
+    this.refreshGradesTable();
+  }
+  patchGradesArray(id, name, course, grade) {
+    for (var i = 0; i < this.gradesArray.length; i++) {
+      if (this.gradesArray[i].id === Number(id)) {
+        this.gradesArray[i].name = name;
+        this.gradesArray[i].course = course;
+        this.gradesArray[i].grade = Number(grade);
+      }
+    }
+    this.refreshGradesTable(this.gradesArray);
   }
 }
