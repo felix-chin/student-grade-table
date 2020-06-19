@@ -22,9 +22,9 @@ class App {
   }
   refreshGradesTable(grades) {
     this.gradeTable.updateGrades(grades);
-    var sum = null;
-    var average = null;
-    for (var i = 0; i < grades.length; i++) {
+    let sum = null;
+    let average = null;
+    for (let i = 0; i < grades.length; i++) {
       sum += grades[i].grade;
     }
     if (isNaN(sum / grades.length)) {
@@ -88,8 +88,8 @@ class App {
     console.error(error);
   }
   handleDeleteGradeSuccess(id) {
-    var newArray = [];
-    for (var i = 0; i < this.gradesArray.length; i++) {
+    const newArray = [];
+    for (let i = 0; i < this.gradesArray.length; i++) {
       if (this.gradesArray[i].id !== id) {
         newArray.push(this.gradesArray[i]);
       }
@@ -113,7 +113,7 @@ class App {
     console.error(error);
   }
   handlePatchGradeSuccess(data) {
-    for (var i = 0; i < this.gradesArray.length; i++) {
+    for (let i = 0; i < this.gradesArray.length; i++) {
       if (this.gradesArray[i].id === Number(data.id)) {
         this.gradesArray[i].name = data.name;
         this.gradesArray[i].course = data.course;
@@ -141,13 +141,13 @@ class App {
     })
   }
   editGrade(id, name, course, grade) {
-    var idInput = document.getElementById('id');
-    var nameInput = document.getElementById('name');
-    var courseInput = document.getElementById('course');
-    var gradeInput = document.getElementById('grade');
-    var addButton = document.getElementById('add');
-    var editButton = document.getElementById('edit');
-    var addHeader = document.querySelector('h4');
+    const idInput = document.getElementById('id');
+    const nameInput = document.getElementById('name');
+    const courseInput = document.getElementById('course');
+    const gradeInput = document.getElementById('grade');
+    const addButton = document.getElementById('add');
+    const editButton = document.getElementById('edit');
+    const addHeader = document.querySelector('h4');
     this.gradeId = id;
     nameInput.value = name;
     courseInput.value = course;

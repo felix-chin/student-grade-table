@@ -12,21 +12,18 @@ class GradeForm {
   }
   handleSubmit(event) {
     event.preventDefault();
-    var addButton = document.getElementById('add');
-    var addHeader = document.querySelector('h4');
-    var formData = new FormData(event.target);
-    var id = null;
-    var name = formData.get('name');
-    var course = formData.get('course');
-    var grade = formData.get('grade');
+    const addButton = document.getElementById('add');
+    const addHeader = document.querySelector('h4');
+    const formData = new FormData(event.target);
+    const name = formData.get('name');
+    const course = formData.get('course');
+    const grade = formData.get('grade');
     if (addButton.textContent === 'Add') {
       this.createGrade(name, course, grade);
-      console.log("testing add");
     } else {
-      this.patchGrade(id, name, course, grade);
+      this.patchGrade(undefined, name, course, grade);
       addButton.textContent = 'Add';
       addHeader.textContent = 'Add Grade';
-      console.log("testing edit");
     }
     event.target.reset();
   }

@@ -7,7 +7,7 @@ class GradeTable {
   }
   updateGrades(grades) {
     this.tableElement.lastElementChild.textContent = '';
-    for(var i = 0; i < grades.length; i++){
+    for(let i = 0; i < grades.length; i++){
       this.renderGradeRow(grades[i], this.deleteGrade, this.editGrade)
     }
     if(grades.length < 1) {
@@ -24,15 +24,15 @@ class GradeTable {
     this.editGrade = editGrade;
   }
   renderGradeRow(data, deleteGrade, editGrade) {
-    var row = document.createElement('tr');
-    var student = document.createElement('td');
-    var course = document.createElement('td');
-    var grade = document.createElement('td');
-    var buttons = document.createElement('td');
-    var delButton = document.createElement('button');
-    var delIcon = document.createElement('i');
-    var editButton = document.createElement('button');
-    var editIcon = document.createElement('i');
+    const row = document.createElement('tr');
+    const student = document.createElement('td');
+    const course = document.createElement('td');
+    const grade = document.createElement('td');
+    const buttons = document.createElement('td');
+    const delButton = document.createElement('button');
+    const delIcon = document.createElement('i');
+    const editButton = document.createElement('button');
+    const editIcon = document.createElement('i');
     student.textContent = data.name;
     course.textContent = data.course;
     grade.textContent = data.grade;
@@ -54,6 +54,5 @@ class GradeTable {
     editButton.addEventListener('click', function () {
       editGrade(data.id, data.name, data.course, data.grade)
     });
-    return row;
   }
 }
